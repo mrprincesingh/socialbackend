@@ -6,7 +6,7 @@ router.route("/getuser").get(getAllUsers)
 // Create a new user
 router.route('/users').post(createUser);
 //Verify User
-router.route('/verifyusers').post(VerifyUser)
+router.route('/verifyusers').get(VerifyUser)
 // Retrieve a user by id
 router.route('/users/:id').get(getUserById);
 
