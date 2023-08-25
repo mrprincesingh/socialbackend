@@ -25,8 +25,8 @@ app.use(express.urlencoded({
 import user from "./routes/userRoute.js"
 import post from "./routes/postRoute.js"
 import {ErrorMiddleware} from "./utils/Error.js"
-import { isAuthenticated } from "./Authenticate/isAuth.js";
-app.use(isAuthenticated);
+
+
 
   app.use("/api/" , user)
   app.use("/api/" , post)
