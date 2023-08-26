@@ -31,18 +31,11 @@ export const logout = catchAsyncError(async (req, res, next) => {
 });
 
 export const createPost = catchAsyncError(async (req, res, next) => {
-  const user = await User.findByIdAndUpdate(
-    req.params.id,
-    {
-      name: req.body.name,
-      bio: req.body.bio,
-      updated_at: Date.now(),
-    },
-    { new: true }
-  );
-  if (!user) return next(new ErrorHandler('User not found', 404));
-  res.json({Success:true , User:user});
-
+  const userId = req.user.id;
+  req.body.user = userId;
+    const newPost = new Post(req.body);
+    const savedPost = await newPost.save();
+    res.status(201).json(savedPost);
   });
   
   // Retrieve a post by id
