@@ -1,6 +1,8 @@
 import express from "express";
 import { VerifyUser, createUser, deleteUserById, getAllUsers, getTopActiveUsers, getTotalUsers, getUserById, updateUserById } from "../controllers/userController.js";
+import { logout } from "../controllers/postController.js";
 const router = express.Router();
+router.route("/logout").get(logout)
 
 router.route("/getuser").get(getAllUsers)
 // Create a new user

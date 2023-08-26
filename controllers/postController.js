@@ -14,6 +14,21 @@ export const getAllPost = catchAsyncError(async (req, res, next) => {
 
 });
 
+export const logout = catchAsyncError(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .json({
+      success: true,
+      message: "Logged Out Successfully",
+    });
+});
+
 export const createPost = catchAsyncError(async (req, res, next) => {
   const userId = req.user.id;
   req.body.user = userId;
