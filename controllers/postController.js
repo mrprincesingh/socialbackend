@@ -65,14 +65,14 @@ export const createPost = catchAsyncError(async (req, res, next) => {
   // Decrement the like count of a post by id (not below 0)
   export const undislikePostById = catchAsyncError(async (req, res, next) => {
     const post = await Post.findById(req.params.id);
-    if (!post) return next(new ErrorHandler('Post not found', 404));
-  
-    if (post.dislikes > 0) {
-      post.dislikes -= 1;
-      await post.save();
-    }
-  
-    res.json(post);
+  if (!post) return next(new ErrorHandler('Post not found', 404));
+
+  if (post.likes > 0) {
+    post.likes -= 1;
+    await post.save();
+  }
+
+  res.json(post);
   });
   
   // Retrieve the total number of posts
