@@ -1,5 +1,5 @@
 import express from "express";
-import { createPost, deletePostById, getAllPost, getPostById, getTopLikedPosts, getTotalPosts, likePostById, unlikePostById, updatePostById } from "../controllers/postController.js";
+import { createPost, deletePostById, getAllPost, getPostById, getTopLikedPosts, getTotalPosts, likePostById, undislikePostById, updatePostById } from "../controllers/postController.js";
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ router.route('/posts/:id').delete( deletePostById);
 router.route('/posts/:id/like').post(likePostById);
 
 // Decrement the like count of a post by id (not below 0)
-router.route('/posts/:id/unlike').post(unlikePostById);
+router.route('/posts/:id/unlike').post(undislikePostById);
 
 // Retrieve the total number of posts
 router.route('/analytics/posts').get(getTotalPosts);
