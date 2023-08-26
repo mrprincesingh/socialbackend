@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route("/getpost").get(getAllPost)
 
-router.route('/posts').post(createPost , isAuthenticated);
+router.route('/posts').post( isAuthenticated,createPost );
 
 // Retrieve a post by id
 router.route('/posts/:id').get(getPostById , isAuthenticated);
