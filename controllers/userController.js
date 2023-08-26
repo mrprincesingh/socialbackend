@@ -23,24 +23,9 @@ export const createUser = catchAsyncError(async (req, res, next) => {
   }
 
   const savedUser = await newUser.save();
-  sendToken(res, savedUser, `User Created Welcome ${savedUser.name}`, 200);
+   res.json({success:true , user:savedUser})
 });
 
-export const VerifyUser = catchAsyncError(async (req , res , next)=>{
-  const { email, password } = req.body;
-  
-  if (!email || !password)
-    return next(new ErrorHandler("please enter all the required fields", 400));
-
-    const user = await User.findOne({ email }).select("+password");
-  if (!user) return next(new ErrorHandler("incorrect email or password", 401));
-
-  const isMatch = await user.comparePassword(password);
-  if (!isMatch)
-    return next(new ErrorHandler("incorrect email or password", 401));
- 
-  sendToken(res, user, `welcome back ${user.name}`, 200);
-})
 
 
 

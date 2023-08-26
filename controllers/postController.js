@@ -2,7 +2,7 @@ import express from "express";
 import { catchAsyncError } from "../utils/catchAsyncError.js";
 import { Post } from "../model/postSechma.js";
 import ErrorHandler from "../utils/errorHandling.js";
-import { User } from "../model/userSechma.js";
+
 const router = express.Router();
 // Create a new post
 
@@ -15,24 +15,9 @@ export const getAllPost = catchAsyncError(async (req, res, next) => {
 
 });
 
-export const logout = catchAsyncError(async (req, res, next) => {
-  res
-    .status(200)
-    .cookie("token", null, {
-      expires: new Date(Date.now()),
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    })
-    .json({
-      success: true,
-      message: "Logged Out Successfully",
-    });
-});
 
 export const createPost = catchAsyncError(async (req, res, next) => {
-  const userId = req.user.id;
-  req.body.user = userId;
+  
     const newPost = new Post(req.body);
     const savedPost = await newPost.save();
     res.status(201).json(savedPost);

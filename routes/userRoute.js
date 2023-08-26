@@ -1,14 +1,13 @@
 import express from "express";
-import { VerifyUser, createUser, deleteUserById, getAllUsers, getTopActiveUsers, getTotalUsers, getUserById, updateUserById } from "../controllers/userController.js";
-import { logout } from "../controllers/postController.js";
+import {createUser, deleteUserById, getAllUsers, getTopActiveUsers, getTotalUsers, getUserById, updateUserById } from "../controllers/userController.js";
+
 const router = express.Router();
-router.route("/logout").get(logout)
+
 
 router.route("/getuser").get(getAllUsers)
 // Create a new user
 router.route('/users').post(createUser);
-//Verify User
-router.route('/verifyusers').post(VerifyUser)
+
 // Retrieve a user by id
 router.route('/users/:id').get(getUserById);
 
